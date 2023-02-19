@@ -38,26 +38,26 @@ services:
       customnetwork:
         ipv4_address: 10.1.1.3
 
-  # web:
-  #   image: vulhub/appweb:7.0.1
-  #   volumes:
-  #     - ./vulhub_files/appweb.conf:/etc/appweb/appweb.conf
-  #   networks:
-  #     customnetwork:
-  #       ipv4_address: 10.1.1.4
+  web:
+    image: vulhub/appweb:7.0.1
+    volumes:
+      - ./vulhub_files/appweb.conf:/etc/appweb/appweb.conf
+    networks:
+      customnetwork:
+        ipv4_address: 10.1.1.4
 
-  # couchdb:
-  #   image: vulhub/couchdb:3.2.1
-  #   ports:
-  #     - "5984"
-  #     - "4369"
-  #     - "9100"
-  #   environment:
-  #     COUCHDB_USER: vulhub
-  #     COUCHDB_PASSWORD: vulhub
-  #   networks:
-  #     customnetwork:
-  #       ipv4_address: 10.1.1.5
+  couchdb:
+    image: vulhub/couchdb:3.2.1
+    ports:
+      - "5984"
+      - "4369"
+      - "9100"
+    environment:
+      COUCHDB_USER: vulhub
+      COUCHDB_PASSWORD: vulhub
+    networks:
+      customnetwork:
+        ipv4_address: 10.1.1.5
 
   huge:
     build: 
@@ -67,68 +67,68 @@ services:
       customnetwork:
         ipv4_address: 10.1.1.10
 
-#   dns:
-#     image: vulhub/bind:latest
-#     ports:
-#      - "53:53/tcp"
-#      - "53:53/udp"
-#     volumes:
-#      - ./vulhub_files/dns/named.conf.local:/etc/bind/named.conf.local
-#      - ./vulhub_files/dns/vulhub.db:/etc/bind/vulhub.db
-#     networks:
-#       customnetwork:
-#         ipv4_address: 10.1.1.11
+  dns:
+    image: vulhub/bind:latest
+    ports:
+     - "53:53/tcp"
+     - "53:53/udp"
+    volumes:
+     - ./vulhub_files/dns/named.conf.local:/etc/bind/named.conf.local
+     - ./vulhub_files/dns/vulhub.db:/etc/bind/vulhub.db
+    networks:
+      customnetwork:
+        ipv4_address: 10.1.1.11
 
-#   grafana:
-#     image: vulhub/grafana:8.2.6
-#     ports:
-#       - "3000"
-#     networks:
-#       customnetwork:
-#         ipv4_address: 10.1.1.12
+  grafana:
+    image: vulhub/grafana:8.2.6
+    ports:
+      - "3000"
+    networks:
+      customnetwork:
+        ipv4_address: 10.1.1.12
 
-#   jenkins:
-#     image: vulhub/jenkins:2.138
-#     ports:
-#       - "50000"
-#       - "8080"
-#     init: true
-#     networks:
-#       customnetwork:
-#         ipv4_address: 10.1.1.14
+  jenkins:
+    image: vulhub/jenkins:2.138
+    ports:
+      - "50000"
+      - "8080"
+    init: true
+    networks:
+      customnetwork:
+        ipv4_address: 10.1.1.14
 
-#   jupyter:
-#     image: vulhub/jupyter-notebook:5.2.2
-#     command: start-notebook.sh --NotebookApp.token=''
-#     ports:
-#      - "8888"
-#     networks:
-#        customnetwork:
-#          ipv4_address: 10.1.1.20
+  jupyter:
+    image: vulhub/jupyter-notebook:5.2.2
+    command: start-notebook.sh --NotebookApp.token=''
+    ports:
+     - "8888"
+    networks:
+       customnetwork:
+         ipv4_address: 10.1.1.20
         
-#   sshd:
-#     image: vulhub/libssh:0.8.1
-#     ports:
-#      - "2222"
-#     networks:
-#        customnetwork:
-#          ipv4_address: 10.1.1.21
+  sshd:
+    image: vulhub/libssh:0.8.1
+    ports:
+     - "2222"
+    networks:
+       customnetwork:
+         ipv4_address: 10.1.1.21
 
-#   solr:
-#     image: vulhub/solr:8.11.0
-#     ports:
-#      - "8983"
-#     networks:
-#        customnetwork:
-#          ipv4_address: 10.1.1.22
+  solr:
+    image: vulhub/solr:8.11.0
+    ports:
+     - "8983"
+    networks:
+       customnetwork:
+         ipv4_address: 10.1.1.22
 
-#   mysql:
-#     image: vulhub/mysql:5.5.23
-#     ports:
-#      - "3306"
-#     networks:
-#        customnetwork:
-#          ipv4_address: 10.1.1.23
+  mysql:
+    image: vulhub/mysql:5.5.23
+    ports:
+     - "3306"
+    networks:
+       customnetwork:
+         ipv4_address: 10.1.1.23
 
 networks:
   customnetwork:
