@@ -1,12 +1,42 @@
 version: '2.1'
 services:
+  wireguard: 
+    image: linuxserver/wireguard
+    container_name: wireguard
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    environment:
+      - PUID=1014
+      - PGID=1015
+      - TZ=Etc/UTC
+      - SERVERURL=srx.gasser.blue
+      - SERVERPORT=51820
+      - PEERS=30
+      - PEERDNS=auto
+      - INTERNAL_SUBNET=10.1.2.0
+      - ALLOWEDIPS=0.0.0.0/0
+      - PERSISTENTKEEPALIVE_PEERS=
+      - LOG_CONFS=true
+    ports:
+      - '51820:51820/udp'
+    volumes:
+      - ./wireguard_data:/config
+      - /lib/modules:/lib/modules
+    sysctls:
+      net.ipv4.conf.all.src_valid_mark: 1
+    restart: unless-stopped
+    networks:
+      customnetwork:
+        ipv4_address: 10.1.1.2
+
   netcat:
     build: 
       context: vulhub_files
       dockerfile: ../Dockerfile.nc
     networks:
       customnetwork:
-        ipv4_address: 10.1.1.2
+        ipv4_address: 10.1.1.3
 
   # web:
   #   image: vulhub/appweb:7.0.1
@@ -14,7 +44,7 @@ services:
   #     - ./vulhub_files/appweb.conf:/etc/appweb/appweb.conf
   #   networks:
   #     customnetwork:
-  #       ipv4_address: 10.1.1.3
+  #       ipv4_address: 10.1.1.4
 
   # couchdb:
   #   image: vulhub/couchdb:3.2.1
@@ -27,7 +57,7 @@ services:
   #     COUCHDB_PASSWORD: vulhub
   #   networks:
   #     customnetwork:
-  #       ipv4_address: 10.1.1.4
+  #       ipv4_address: 10.1.1.5
 
   huge:
     build: 
