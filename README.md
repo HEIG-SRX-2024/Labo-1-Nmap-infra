@@ -13,7 +13,7 @@ La plupart des machines viennent du projet [Linux Vulhub](https://github.com/vul
 Les machines suivantes ont été ajoutées manuellement:
 
 - wireguard - qui permet une connexion sécurisée depuis l'extérieur
-- netcat - avec une backdoor pré-installé
+- netcat - avec une backdoor pré-installée
 - huge - qui contient plusieurs services
 
 ## Connection
@@ -35,17 +35,18 @@ nc.traditional -lvp 4444 -e /bin/bash
 ```
 
 Ceci lance la commande `netcat` en écoutant sur le port `4444` et en connectant les entrées et sorties avec la commande `/bin/bash`.
-Pour éviter qu'un·e étudiant·e bloque les autres en se connectant sur ce port, il y a une boule infinie, plus une deuxième boucle qui arrète `netcat` tous les 10 secondes.
+Pour éviter qu'un·e étudiant·e bloque les autres en se connectant sur ce port, il y a une boucle infinie,
+plus une deuxième boucle qui arrète `netcat` tous les 10 secondes.
 Vous trouverez la commande complète dans le [Dockerfilen.nc](Dockerfile.nc).
 
-Pour accéder à ce backdoor, vous pouvez lancer
+Pour accéder à cette backdoor, vous pouvez lancer
 
 ```
 nc 10.1.1.3 4444
 ```
 
 Et vous avez jusqu'à 10 secondes pour explorer le système et trouver le `password.txt`.
-Si vous voulez avoir plus de temps, vous pouvez aussi lancer vous-même un backdoor supplémentaire sur la machine 10.1.1.3:
+Si vous voulez avoir plus de temps, vous pouvez aussi lancer vous-même une backdoor supplémentaire sur la machine 10.1.1.3:
 
 ```
 nc.traditional -lvp 5555 -e /bin/bash &
@@ -53,3 +54,5 @@ nc.traditional -lvp 5555 -e /bin/bash &
 
 Bon - ceci ne marche pas, parce que le `Dockerfile.nc` contient une ligne qui termine tous les processus qui contiennent la chaîne `bash`.
 A vous de trouver un meilleur moyen - sans changer le `Dockerfile.nc`!
+Pour le·a première qui trouve, +1 point pour le prochain TP, pour le·a deuxième, +0.5 points sur le prochain TP.
+Envoyez un email à linus.gasser@heig-vd.ch avec la solution.
