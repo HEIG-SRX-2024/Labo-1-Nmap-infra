@@ -41,13 +41,12 @@ services:
         ipv4_address: 10.1.3.2
 
   passwords:
-    image: lipanski/docker-static-website:latest
-    volumes:
-      - ./passwords.html:/home/static/index.html
+    build:
+      context: vulhub_files
+      dockerfile: ../Dockerfile.passwords
     networks:
       hiddennetwork:
         ipv4_address: 10.1.3.173
-    command: /busybox httpd -f -v -p 80 -c httpd.conf
 
   web:
     image: vulhub/appweb:7.0.1
